@@ -39,6 +39,14 @@ public class LoginStepDefinitions {
     }
 
 
+    @When("user logs in as a driver")
+    public void user_logs_in_as_a_driver() {
+        System.out.println("Login as driver");
+        loginPage.login("user19","UserUser123");
+    }
+
+
+
 
 
 
