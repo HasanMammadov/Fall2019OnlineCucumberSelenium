@@ -47,7 +47,15 @@ public class CalendarEventsPage extends AbstractPageBase {
 
     @FindBy(xpath = "//label[text()='Description']/following-sibling::div//div")
     private WebElement generalInfoDescription;
+    @FindBy(xpath = "//*[contains(text(),'View per page:')]/following-sibling::*//a")
 
+    private List<WebElement> viewPerPageElements;
+
+    public List<String> getViewPerPageOptions() {
+        BrowserUtils.waitForPageToLoad(20);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[title='Create Calendar event']")));
+        return BrowserUtils.getTextFromWebElements(viewPerPageElements);
+    }
     public void enterCalendarEventTitle(String titleValue) {
         BrowserUtils.waitForPageToLoad(20);
         wait.until(ExpectedConditions.visibilityOf(title)).sendKeys(titleValue);
