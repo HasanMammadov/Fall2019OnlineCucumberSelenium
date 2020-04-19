@@ -1,3 +1,4 @@
+@login
 Feature: Login
   As user, I want to be able to login with username and password
 Background: Open login page
@@ -20,7 +21,12 @@ Background: Open login page
       Then user should verify that title is a Dashboard
 
       @login_with_params
-      Scenario: login with parameters
-        When user enters "storemanager85" username and "UserUser123" password
+      Scenario Outline: login with parameters
+        When user enters  "<username>" and  "<password>"
         Then user should verify that title is a Dashboard
+        Examples:
+          |username        |password    |
+          |storemanager85  | UserUser123|
+          |salesmanager110 | UserUser123|
+          |user19          | UserUser12 |
 

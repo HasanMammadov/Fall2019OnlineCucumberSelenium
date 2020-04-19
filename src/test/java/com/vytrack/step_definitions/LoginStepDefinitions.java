@@ -1,12 +1,16 @@
 package com.vytrack.step_definitions;
 
 import com.vytrack.pages.LoginPage;
+import com.vytrack.pages.activities.CalendarEventsPage;
 import com.vytrack.utilities.ConfigurationReader;
 import com.vytrack.utilities.Driver;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+
+import java.util.Map;
 
 public class LoginStepDefinitions {
     LoginPage loginPage = new LoginPage();
@@ -16,37 +20,51 @@ public class LoginStepDefinitions {
         System.out.println("Open login page");
         String url = ConfigurationReader.getProperty("qa3");
         Driver.getDriver().get(url);
-        Driver.getDriver().manage().window().maximize();
     }
 
     @When("user logs in as a sales manager")
     public void user_logs_in_as_a_sales_manager() {
         System.out.println("Login as sales manager");
-        loginPage.login("storemanager85","UserUser123");
+        loginPage.login("storemanager85", "UserUser123");
     }
 
     @Then("user should verify that title is a Dashboard")
     public void user_should_verify_that_title_is_a_Dashboard() {
         System.out.println("verify title is Dashboard");
-        Assert.assertEquals("Dashboard",Driver.getDriver().getTitle());
-        Driver.closeDriver();
+        Assert.assertEquals("Dashboard", Driver.getDriver().getTitle());
     }
 
 
     @When("user logs in as a store manager")
     public void user_logs_in_as_a_store_manager() {
-       loginPage.login("storemanager85","UserUser123");
+        loginPage.login("storemanager85", "UserUser123");
     }
 
 
     @When("user logs in as a driver")
     public void user_logs_in_as_a_driver() {
         System.out.println("Login as driver");
-        loginPage.login("user19","UserUser123");
+        loginPage.login("user19", "UserUser123");
     }
 
 
+    @When("user enters {string} username and {string} password")
+    public void userEntersUsernameAndPassword(String arg0, String arg1) {
+        System.out.printf("Login username %s and %s password\n", arg0, arg1);
+        loginPage.login(arg0, arg1);
+    }
 
+    @When("user navigates to {string} and {string}")
+    public void user_navigates_to_and(String tab, String module) {
+        System.out.printf("User clicks on the %s and navigates to %s module\n",tab,module);
+        loginPage.navigateTo(tab,module);
+
+
+    }
+    @When("user enters  {string} and  {string}")
+    public void user_enters_and(String string, String string2) {
+        loginPage.login(string,string2);
+    }
 
 
 
